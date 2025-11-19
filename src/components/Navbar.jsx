@@ -1,6 +1,14 @@
-import { Menu, Github, Linkedin, Mail } from "lucide-react";
+import { Menu, Github, Linkedin, Mail, Moon, Sun } from "lucide-react";
+import { useEffect, useState } from "react";
 
 export default function Navbar() {
+  const [dark, setDark] = useState(false);
+
+  useEffect(() => {
+    if (dark) document.documentElement.classList.add('dark');
+    else document.documentElement.classList.remove('dark');
+  }, [dark]);
+
   return (
     <header className="sticky top-0 z-40 backdrop-blur-md bg-white/60 border-b border-black/5">
       <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
@@ -23,6 +31,9 @@ export default function Navbar() {
         </nav>
 
         <div className="flex items-center gap-3">
+          <button onClick={() => setDark(d => !d)} className="p-2 rounded-full hover:bg-black/5" aria-label="theme">
+            {dark ? <Sun size={20} /> : <Moon size={20} />}
+          </button>
           <a href="https://github.com/Yashvi-Vekariya" target="_blank" rel="noreferrer" className="p-2 rounded-full hover:bg-black/5">
             <Github size={20} />
           </a>
